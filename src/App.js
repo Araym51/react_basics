@@ -6,36 +6,37 @@ import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/myInput";
 
 function App() {
-    const [posts, setPosts] = useState([
-        {id: 1, title: 'Javascript', body: 'Description'},
-        {id: 2, title: 'Python', body: 'Description'},
-        {id: 3, title: 'C#', body: 'Description'},
-        {id: 4, title: 'Ruby', body: 'Description'},
-    ])
+    const [posts, setPosts] = useState([])
 
     const [title, setTitle] = useState('')
 
-    const bodyInputRef = useRef()
+    const [body, setBody] = useState('')
 
-    const addNewPost = (e) => {
-        e.preventDefault()
-        console.log(title)
-        console.log(bodyInputRef.current.value)
+    const addNewPost = (event) => {
+        event.preventDefault() // почему здесь preventDefault() не работает?
+        const newPost = {
+            id: Date.now(),
+            title,
+            body
+        }
+        console.log(newPost)
+        setPosts([...posts, newPost])
+        setTitle('')
+        setBody('')
     }
 
     return (
         <div className="App">
             {/*<Counter/>*/}
             <form>
-                {/*управляемый компонент*/}
                 <MyInput value={title}
                          onChange={e => setTitle(e.target.value)}
                          type="text"
                          placeholder="Название поста"
                 />
-                {/*неуправляемый компонент*/}
                 <MyInput
-                    ref={bodyInputRef}
+                    value={body}
+                    onChange={e => setBody(e.target.value)}
                     type="text"
                     placeholder="Описание поста"
                 />

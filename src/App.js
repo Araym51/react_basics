@@ -7,36 +7,29 @@ import MyInput from "./components/UI/input/myInput";
 
 function App() {
     const [posts, setPosts] = useState([])
-
-    const [title, setTitle] = useState('')
-
-    const [body, setBody] = useState('')
+    const [post, setPost] = useState({title: '', body: ''})
 
     const addNewPost = (event) => {
         event.preventDefault() // почему здесь preventDefault() не работает?
-        const newPost = {
-            id: Date.now(),
-            title,
-            body
-        }
-        console.log(newPost)
-        setPosts([...posts, newPost])
-        setTitle('')
-        setBody('')
+        // console.log(newPost)
+
+        setPosts([...posts, {...post, id: Date.now()}])
+        setPost({title: '', body: ''})
     }
 
     return (
         <div className="App">
             {/*<Counter/>*/}
             <form>
-                <MyInput value={title}
-                         onChange={e => setTitle(e.target.value)}
-                         type="text"
-                         placeholder="Название поста"
+                <MyInput
+                    value={post.title}
+                    onChange={e => setPost({...post, title: e.target.value})}
+                    type="text"
+                    placeholder="Название поста"
                 />
                 <MyInput
-                    value={body}
-                    onChange={e => setBody(e.target.value)}
+                    value={post.body}
+                    onChange={e => setPost({...post, body: e.target.value})}
                     type="text"
                     placeholder="Описание поста"
                 />

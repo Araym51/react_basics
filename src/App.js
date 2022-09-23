@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Counter from "./components/Counter";
+import './styles/App.css'
 
 function App() {
     let [value, setValue] = useState('текст в инпуте')
@@ -7,10 +8,16 @@ function App() {
     return (
         <div className="App">
             <Counter/>
-            <h1>{value}</h1>
-            <input type='text'
-                   value={value}
-                   onChange={event => setValue(event.target.value)}/>
+            <div className="post">
+                <strong>1. Javascript</strong>
+                <div>
+                    Javascript - язык программирования
+                </div>
+                <div className="post_btns">
+                    <button>Удалить</button>
+                </div>
+            </div>
+
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import Counter from "./components/Counter";
 import './styles/App.css'
 import PostList from "./components/PostList";
@@ -13,14 +13,25 @@ function App() {
         {id: 4, title: 'Ruby', body: 'Description'},
     ])
 
+    const [title, setTitle] = useState('')
+
+    const bodyInputRef = useRef()
+
+    const addNewPost = (e) => {
+        e.preventDefault()
+        console.log(title)
+        console.log(bodyInputRef.current.value)
+    }
 
     return (
         <div className="App">
             {/*<Counter/>*/}
             <form>
-                <MyInput type="text" placeholder="Название поста"/>
-                <MyInput type="text" placeholder="Описание поста"/>
-                <MyButton>Создать пост</MyButton>
+                <MyInput value={title} onChange={e => setTitle(e.target.value)} type="text"
+                         placeholder="Название поста"/>
+                {/*<input ref={bodyInputRef} type="text"/>*/}
+                <MyInput ref={bodyInputRef} type="text" placeholder="Описание поста"/>
+                <MyButton type="submit" onClick={addNewPost}>Создать пост</MyButton>
             </form>
             <PostList posts={posts} title="Список постов 1"/>
         </div>

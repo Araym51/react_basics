@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Counter from "./components/Counter";
 import './styles/App.css'
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
 
 function App() {
     const [posts, setPosts] = useState([
@@ -14,7 +15,12 @@ function App() {
 
     return (
         <div className="App">
-            <Counter/>
+            {/*<Counter/>*/}
+            <form>
+                <input type="text" placeholder="Название поста"/>
+                <input type="text" placeholder="Описание поста"/>
+                <MyButton disabled>Создать пост</MyButton>
+            </form>
             <PostList posts={posts} title="Список постов 1"/>
         </div>
     );

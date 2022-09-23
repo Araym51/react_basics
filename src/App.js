@@ -27,10 +27,19 @@ function App() {
         <div className="App">
             {/*<Counter/>*/}
             <form>
-                <MyInput value={title} onChange={e => setTitle(e.target.value)} type="text"
-                         placeholder="Название поста"/>
-                {/*<input ref={bodyInputRef} type="text"/>*/}
-                <MyInput ref={bodyInputRef} type="text" placeholder="Описание поста"/>
+                {/*управляемый компонент*/}
+                <MyInput value={title}
+                         onChange={e => setTitle(e.target.value)}
+                         type="text"
+                         placeholder="Название поста"
+                />
+                {/*неуправляемый компонент*/}
+                <MyInput
+                    ref={bodyInputRef}
+                    type="text"
+                    placeholder="Описание поста"
+                />
+
                 <MyButton type="submit" onClick={addNewPost}>Создать пост</MyButton>
             </form>
             <PostList posts={posts} title="Список постов 1"/>

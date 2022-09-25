@@ -4,38 +4,19 @@ import './styles/App.css'
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/myInput";
+import PostForm from "./components/PostForm";
 
 function App() {
     const [posts, setPosts] = useState([])
-    const [post, setPost] = useState({title: '', body: ''})
 
-    const addNewPost = (event) => {
-        event.preventDefault() // почему здесь preventDefault() не работает?
-        // console.log(newPost)
-
-        setPosts([...posts, {...post, id: Date.now()}])
-        setPost({title: '', body: ''})
+    const createPost = (newPost) => {
+        setPosts([...posts, newPost])
     }
 
     return (
         <div className="App">
             {/*<Counter/>*/}
-            <form>
-                <MyInput
-                    value={post.title}
-                    onChange={e => setPost({...post, title: e.target.value})}
-                    type="text"
-                    placeholder="Название поста"
-                />
-                <MyInput
-                    value={post.body}
-                    onChange={e => setPost({...post, body: e.target.value})}
-                    type="text"
-                    placeholder="Описание поста"
-                />
-
-                <MyButton type="submit" onClick={addNewPost}>Создать пост</MyButton>
-            </form>
+            <PostForm create={createPost}/>
             <PostList posts={posts} title="Список постов 1"/>
         </div>
     );

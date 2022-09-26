@@ -13,11 +13,16 @@ function App() {
         setPosts([...posts, newPost])
     }
 
+    // получаем post из дочернего компонента
+    const removePost = (post) => {
+        setPosts(posts.filter(p => p.id !== post.id))
+    }
+
     return (
         <div className="App">
             {/*<Counter/>*/}
             <PostForm create={createPost}/>
-            <PostList posts={posts} title="Список постов 1"/>
+            <PostList remove={removePost} posts={posts} title="Список постов 1"/>
         </div>
     );
 }

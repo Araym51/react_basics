@@ -18,7 +18,7 @@ function App() {
     }, [filter.sort, posts])
 
     const sortedAndSearchPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query))
+        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
     }, [filter.sort, sortedPosts])
 
     const createPost = (newPost) => {
@@ -36,10 +36,7 @@ function App() {
             <PostForm create={createPost}/>
             <hr style={{margin: '15px 0'}}/>
             <PostFilter filter={filter} setFilter={setFilter}/>
-            {sortedAndSearchPosts.length
-                ? <PostList remove={removePost} posts={sortedAndSearchPosts} title="Список постов 1"/>
-                : <h1 style={{textAlign: 'center'}}>Посты не найдены!</h1>
-            }
+            <PostList remove={removePost} posts={sortedAndSearchPosts} title="Список постов 1"/>
         </div>
     );
 }

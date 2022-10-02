@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import './styles/App.css'
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
@@ -14,6 +14,10 @@ function App() {
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [modal, setModal] = useState(false)
     const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
+
+    useEffect(() => {
+        fetchPosts()
+    }, [])
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -33,7 +37,7 @@ function App() {
     return (
         <div className="App">
             {/*<Counter/>*/}
-            <button onClick={fetchPosts}>GET POSTS</button>
+            {/*<button onClick={fetchPosts}>GET POSTS</button>*/}
             <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
                 Создать пост
             </MyButton>

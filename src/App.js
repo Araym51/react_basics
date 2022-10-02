@@ -6,6 +6,7 @@ import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import {usePosts} from "./hooks/usePosts";
+import axios from "axios";
 
 function App() {
 
@@ -19,6 +20,11 @@ function App() {
         setModal(false)
     }
 
+    async function fetchPosts() {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+        setPosts(response.data)
+    }
+
     // получаем post из дочернего компонента
     const removePost = (post) => {
         setPosts(posts.filter(p => p.id !== post.id))
@@ -27,6 +33,7 @@ function App() {
     return (
         <div className="App">
             {/*<Counter/>*/}
+            <button onClick={fetchPosts}>GET POSTS</button>
             <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
                 Создать пост
             </MyButton>
